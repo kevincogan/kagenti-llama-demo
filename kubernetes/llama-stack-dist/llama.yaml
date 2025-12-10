@@ -1,0 +1,28 @@
+apiVersion: llamastack.io/v1alpha1
+kind: LlamaStackDistribution
+metadata:
+  name: lsd-llama32-3b
+spec:
+  replicas: 1
+  server:
+    containerSpec:
+      resources:
+        requests:
+          cpu: "250m"
+          memory: "500Mi"
+        limits:
+          cpu: 4
+          memory: "12Gi"
+      env:
+        - name: INFERENCE_MODEL
+          value: "llama32-3b"
+        - name: VLLM_MAX_TOKENS
+          value: "4096"
+        - name: VLLM_URL
+          value: "https://llama32-3b.serving.svc.cluster.local/v1"
+        - name: VLLM_TLS_VERIFY
+          value: "false"
+      name: llama-stack
+      port: 8321
+    distribution:
+      name: rh-dev
