@@ -46,22 +46,19 @@ The `LLama Stack` endpoint can be tested by doing a port forward and a curl.
 
 ``` bash
 kubectl port-forward -n serving svc/lsd-llama32-3b-service 8321:8321
-curl -X POST http://localhost:8321/v1/inference/chat-completion \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model_id": "vllm-inference/llama32-3b",
-    "messages": [
-      {
-        "role": "user",
-        "content": "Hello, how are you?"
-      }
-    ],
-    "sampling_params": {
-      "max_tokens": 100
-    },
-    "stream": false
-  }'
-{"metrics":[{"metric":"prompt_tokens","value":16,"unit":null},{"metric":"completion_tokens","value":27,"unit":null},{"metric":"total_tokens","value":43,"unit":null}],"completion_message":{"role":"assistant","content":"I'm doing well, thank you for asking. How can I assist you today?","stop_reason":"end_of_turn","tool_calls":[]},"logprobs":null}%
+curl -X POST http://localhost:8321/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{
+      "model": "llama32-3b",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello, how are you?"
+        }
+      ],
+      "max_tokens": 100,
+      "stream": false
+    }'
 ```
 
 # Kagenti

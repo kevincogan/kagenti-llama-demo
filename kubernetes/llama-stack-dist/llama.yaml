@@ -19,7 +19,7 @@ spec:
         - name: VLLM_MAX_TOKENS
           value: "4096"
         - name: VLLM_URL
-          value: "https://llama32-3b.serving.svc.cluster.local/v1"
+          value: "http://llama32-3b-predictor.serving.svc.cluster.local:8080/v1"
         - name: VLLM_TLS_VERIFY
           value: "false"
       name: llama-stack
